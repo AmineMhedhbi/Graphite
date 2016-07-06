@@ -33,6 +33,7 @@
 
 # Certain Directories
 Graphite/results/*
+Graphite/results/latest
 Graphite/technology/*
 Graphite/tools/*
 Graphite/qemu/*
