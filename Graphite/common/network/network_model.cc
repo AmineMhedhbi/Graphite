@@ -8,6 +8,7 @@ using namespace std;
 #include "network_model_emesh_hop_counter.h"
 #include "network_model_emesh_hop_by_hop.h"
 #include "network_model_atac.h"
+#include "network_model_ornoc.h"
 #include "memory_manager.h"
 #include "simulator.h"
 #include "config.h"
@@ -63,6 +64,9 @@ NetworkModel::createModel(Network *net, SInt32 network_id, UInt32 model_type)
 
    case NETWORK_ATAC:
       return new NetworkModelAtac(net, network_id);
+
+   case NETWORK_ORNOC:
+      return new NetworkModelOrnoc(net, network_id);
 
    default:
       LOG_PRINT_ERROR("Unrecognized Network Model(%u)", model_type);
@@ -330,6 +334,8 @@ NetworkModel::parseNetworkType(string str)
       return NETWORK_ECLOS;
    else if (str == "atac")
       return NETWORK_ATAC;
+   else if (str == "ornoc")
+      return NETWORK_ORNOC;
    else
       return (UInt32)-1;
 }
@@ -347,6 +353,7 @@ NetworkModel::isTileCountPermissible(UInt32 network_type, SInt32 tile_count)
          return NetworkModelEMeshHopByHop::isTileCountPermissible(tile_count);
 
       case NETWORK_ATAC:
+      case NETWORK_ORNOC:
          return NetworkModelAtac::isTileCountPermissible(tile_count);
       
       default:
@@ -381,6 +388,10 @@ NetworkModel::computeMemoryControllerPositions(UInt32 network_type, SInt32 num_m
       case NETWORK_ATAC:
          return NetworkModelAtac::computeMemoryControllerPositions(num_memory_controllers, tile_count);
 
+      case NETWORK_ORNOC:
+         return NetworkModelOrnoc::computeMemoryControllerPositions(num_memory_controllers, tile_count);
+
+
       default:
          fprintf(stderr, "*ERROR* Unrecognized network type(%u)\n", network_type);
          abort();
@@ -402,6 +413,9 @@ NetworkModel::computeProcessToTileMapping(UInt32 network_type)
 
       case NETWORK_ATAC:
          return NetworkModelAtac::computeProcessToTileMapping();
+
+      case NETWORK_ORNOC:
+         return NetworkModelOrnoc::computeProcessToTileMapping();
 
       default:
          fprintf(stderr, "*ERROR* Unrecognized network type(%u)\n", network_type);

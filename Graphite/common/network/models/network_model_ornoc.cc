@@ -31,9 +31,9 @@ SInt32 NetworkModelOrnoc::_numY_sub_clusters;
 SInt32 NetworkModelOrnoc::_sub_cluster_width;
 SInt32 NetworkModelOrnoc::_sub_cluster_height;
 // Cluster Boundaries and Access Points
-vector<NetworkModelOrnoc::ClusterInfo> NetworkModelAtac::_cluster_info_list;
+vector<NetworkModelOrnoc::ClusterInfo> NetworkModelOrnoc::_cluster_info_list;
 // Type of Receive Network
-NetworkModelOrnoc::ReceiveNetType NetworkModelAtac::_receive_net_type;
+NetworkModelOrnoc::ReceiveNetType NetworkModelOrnoc::_receive_net_type;
 // Num Receive Nets
 SInt32 NetworkModelOrnoc::_num_receive_networks_per_cluster;
 // Global Routing Strategy
