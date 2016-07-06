@@ -33,7 +33,8 @@
 
 # Certain Directories
 Graphite/results/*
-Graphite/results/latest
+*/Graphite/results/latest
+*latest
 Graphite/technology/*
 Graphite/tools/*
 Graphite/qemu/*
