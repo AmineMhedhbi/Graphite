@@ -58,11 +58,11 @@ void NetworkTopology::print_conncetivity_receivers_info()
             if (_receiving_clusters[i][j] != NULL)
             {
                 std::cout << "Cluster " << j  << " on layer "
-                          << _receiving_clusters[i][j] -> _layer
+                          << _receiving_clusters[i][j] -> _layer + 1
                           << ", sends on wavelength "
                           << _receiving_clusters[i][j] -> _wavelength
                           << ", of waveguide "
-                          << _receiving_clusters[i][j] -> _waveguide;
+                          << _receiving_clusters[i][j] -> _waveguide + 1;
                 if (_receiving_clusters[i][j] -> _direction == CW)
                 {
                     std::cout << " in the CW direction." << std::endl;

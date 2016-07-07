@@ -3,7 +3,7 @@
 #include <assert.h>
 
 #define DELIMITER_EMPTY_SPACE ' '
-#define CONNECTIVITY_SECTION "connectivity_matrix"
+#define CONNECTIVITY_SECTION "network_topology"
 
 std::string trim(std::string const& source,
                  char const* delims = " \t\r\n")

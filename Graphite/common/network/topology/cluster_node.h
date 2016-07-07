@@ -9,7 +9,7 @@ typedef struct
     int _layer;
     int _wavelength;
     int _waveguide;
-    int _direction; // 
+    int _direction; // not used in assignment nor topology design as of now
 } ReceivingCluster;
 
 #endif // CLUSTER_NODE_H
