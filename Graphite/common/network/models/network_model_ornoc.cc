@@ -47,11 +47,11 @@ NetworkModelOrnoc::NetworkModelOrnoc(Network *net, SInt32 network_id)
 {
    try
    {
-      _flit_width = Sim()->getCfg()->getInt("network/atac/flit_width");
+      _flit_width = Sim()->getCfg()->getInt("network/ornoc/flit_width");
    }
    catch (...)
    {
-      LOG_PRINT_ERROR("Could not read ATAC frequency and flit_width parameters from cfg file");
+      LOG_PRINT_ERROR("Could not read ORNOC frequency and flit_width parameters from cfg file");
    }
 
    // Has Broadcast Capability
@@ -82,23 +82,23 @@ NetworkModelOrnoc::initializeANetTopologyParams()
 
    try
    {
-      _cluster_size = Sim()->getCfg()->getInt("network/atac/cluster_size");
-      _num_access_points_per_cluster = Sim()->getCfg()->getInt("network/atac/num_optical_access_points_per_cluster");
+      _cluster_size = Sim()->getCfg()->getInt("network/ornoc/cluster_size");
+      _num_access_points_per_cluster = Sim()->getCfg()->getInt("network/ornoc/num_optical_access_points_per_cluster");
 
       // Topology
-      _receive_net_type = parseReceiveNetType(Sim()->getCfg()->getString("network/atac/receive_network_type"));
-      _num_receive_networks_per_cluster = Sim()->getCfg()->getInt("network/atac/num_receive_networks_per_cluster");
+      _receive_net_type = parseReceiveNetType(Sim()->getCfg()->getString("network/ornoc/receive_network_type"));
+      _num_receive_networks_per_cluster = Sim()->getCfg()->getInt("network/ornoc/num_receive_networks_per_cluster");
       
       // Routing
-      _global_routing_strategy = parseGlobalRoutingStrategy(Sim()->getCfg()->getString("network/atac/global_routing_strategy"));
-      _unicast_distance_threshold = Sim()->getCfg()->getInt("network/atac/unicast_distance_threshold");
+      _global_routing_strategy = parseGlobalRoutingStrategy(Sim()->getCfg()->getString("network/ornoc/global_routing_strategy"));
+      _unicast_distance_threshold = Sim()->getCfg()->getInt("network/ornoc/unicast_distance_threshold");
 
       // Is contention model enabled?
-      _contention_model_enabled = Sim()->getCfg()->getBool("network/atac/queue_model/enabled");
+      _contention_model_enabled = Sim()->getCfg()->getBool("network/ornoc/queue_model/enabled");
    }
    catch (...)
    {
-      LOG_PRINT_ERROR("Error reading atac parameters");
+      LOG_PRINT_ERROR("Error reading ornoc parameters");
    }
 
    LOG_ASSERT_ERROR(_num_access_points_per_cluster <= _cluster_size,
@@ -156,25 +156,25 @@ NetworkModelOrnoc::createANetRouterAndLinkModels()
    try
    {
       // ENet Router
-      enet_router_delay = (UInt64) Sim()->getCfg()->getInt("network/atac/enet/router/delay");
-      num_flits_per_output_buffer_enet_router = Sim()->getCfg()->getInt("network/atac/enet/router/num_flits_per_port_buffer");
+      enet_router_delay = (UInt64) Sim()->getCfg()->getInt("network/ornoc/enet/router/delay");
+      num_flits_per_output_buffer_enet_router = Sim()->getCfg()->getInt("network/ornoc/enet/router/num_flits_per_port_buffer");
 
       // Send Hub Router
-      send_hub_router_delay = (UInt64) Sim()->getCfg()->getInt("network/atac/onet/send_hub/router/delay");
-      num_flits_per_output_buffer_send_hub_router = Sim()->getCfg()->getInt("network/atac/onet/send_hub/router/num_flits_per_port_buffer");
+      send_hub_router_delay = (UInt64) Sim()->getCfg()->getInt("network/ornoc/onet/send_hub/router/delay");
+      num_flits_per_output_buffer_send_hub_router = Sim()->getCfg()->getInt("network/ornoc/onet/send_hub/router/num_flits_per_port_buffer");
 
       // Receive Hub Router
-      receive_hub_router_delay = (UInt64) Sim()->getCfg()->getInt("network/atac/onet/receive_hub/router/delay");
-      num_flits_per_output_buffer_receive_hub_router = Sim()->getCfg()->getInt("network/atac/onet/receive_hub/router/num_flits_per_port_buffer");
+      receive_hub_router_delay = (UInt64) Sim()->getCfg()->getInt("network/ornoc/onet/receive_hub/router/delay");
+      num_flits_per_output_buffer_receive_hub_router = Sim()->getCfg()->getInt("network/ornoc/onet/receive_hub/router/num_flits_per_port_buffer");
       
       // Star Net Router
-      star_net_router_delay = (UInt64) Sim()->getCfg()->getInt("network/atac/star_net/router/delay");
-      num_flits_per_output_buffer_star_net_router = Sim()->getCfg()->getInt("network/atac/star_net/router/num_flits_per_port_buffer");
+      star_net_router_delay = (UInt64) Sim()->getCfg()->getInt("network/ornoc/star_net/router/delay");
+      num_flits_per_output_buffer_star_net_router = Sim()->getCfg()->getInt("network/ornoc/star_net/router/num_flits_per_port_buffer");
       
       // Electrical Link Type
-      electrical_link_type = Sim()->getCfg()->getString("network/atac/electrical_link_type");
+      electrical_link_type = Sim()->getCfg()->getString("network/ornoc/electrical_link_type");
       
-      contention_model_type = Sim()->getCfg()->getString("network/atac/queue_model/type");
+      contention_model_type = Sim()->getCfg()->getString("network/ornoc/queue_model/type");
    }
    catch (...)
    {
