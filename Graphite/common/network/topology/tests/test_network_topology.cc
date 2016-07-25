@@ -5,7 +5,7 @@
 int main()
 {
     NetworkTopology ornoc_topology;
-    ornoc_topology.init(CONFIG_FILE_PATH, 1, 8);
+    ornoc_topology.init(CONFIG_FILE_PATH, 8);
     ornoc_topology.print_conncetivity_receivers_info();
 
     return 0;

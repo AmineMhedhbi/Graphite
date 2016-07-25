@@ -3,7 +3,6 @@
 #include <assert.h>
 
 #define DELIMITER_EMPTY_SPACE ' '
-#define CONNECTIVITY_SECTION "network_topology"
 
 std::string trim(std::string const& source,
                  char const* delims = " \t\r\n")
@@ -21,7 +20,8 @@ std::string trim(std::string const& source,
     return result;
 }
 
-ConfigFile::ConfigFile(std::string const& configFile)
+ConfigFile::ConfigFile(std::string const& configFile,
+                       int num_clusters)
 {
     std::ifstream file(configFile.c_str());
 
@@ -35,6 +35,20 @@ ConfigFile::ConfigFile(std::string const& configFile)
     int num_clusters_counted = 0;
     bool is_first_matrix_row_read = false;
 
+    std::string connectivity_section;
+    switch(num_clusters){
+        case 2: connectivity_section = "network_topology_two_clusters" ;
+                break;
+        case 4: connectivity_section = "network_topology_four_clusters" ;
+                break;
+        case 8: connectivity_section = "network_topology_eight_clusters" ;
+                break;
+        case 16: connectivity_section = "network_topology_sixteen_clusters" ;
+                 break;
+        default: connectivity_section = "network_topology_eight_clusters" ;
+                 break;
+    }
+
     while (std::getline(file,line))
     {
         if (! line.length()) continue;
@@ -47,7 +61,7 @@ ConfigFile::ConfigFile(std::string const& configFile)
             continue;
         }
 
-        if (inSection != CONNECTIVITY_SECTION)
+        if (inSection != connectivity_section)
         {
             posEqual=line.find('=');
             name  = trim(line.substr(0,posEqual));
@@ -55,7 +69,7 @@ ConfigFile::ConfigFile(std::string const& configFile)
 
             content_[inSection+'/'+name]=Alchemist(value);
         }
-        else if (inSection == CONNECTIVITY_SECTION)
+        else if (inSection == connectivity_section)
         {
             std::vector<int> cluster_connectivity_row = split(line, DELIMITER_EMPTY_SPACE);
 

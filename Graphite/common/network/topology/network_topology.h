@@ -8,7 +8,7 @@
 class NetworkTopology
 {
     public:
-        void init(std::string const& configFile, int num_layers, int num_clusters);
+        void init(std::string const& configFile, int num_clusters);
         std::vector < std::vector<ReceivingCluster*> > _receiving_clusters;
         void print_conncetivity_receivers_info();
 
@@ -17,7 +17,7 @@ class NetworkTopology
         int _num_clusters;
         int _num_clusters_per_layer;
         int _num_waveguides;
-        int *_waveguides_size;
+        int *_waveguides_size; // #wavelengths per waveguide in the model.
 };
 
 #endif // NETWORK_TOPOLOGY_H

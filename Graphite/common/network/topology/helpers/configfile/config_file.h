@@ -10,7 +10,7 @@
 class ConfigFile
 {
     public:
-        ConfigFile(std::string const& configFile);
+        ConfigFile(std::string const& configFile, int num_clusters);
 
         Alchemist const& Value(std::string const& section, std::string const& entry) const;
         Alchemist const& Value(std::string const& section, std::string const& entry, int value);

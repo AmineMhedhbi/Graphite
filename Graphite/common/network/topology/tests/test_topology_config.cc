@@ -5,13 +5,18 @@
 
 int main()
 {
-    ConfigFile cf(CONFIG_FILE_PATH);
+    // power of 2, number of clusters chosen to read proper config
+    int num_clusters = 8;
+    ConfigFile cf(CONFIG_FILE_PATH, num_clusters);
 
-    int num_waveguides = cf.Value("general" ,"num_waveguides");
+    int num_waveguides, num_layers;
+    num_waveguides = cf.Value("general" ,"num_waveguides");
+    num_layers = cf.Value("general", "num_layers");
     std::cout << std::endl;
-    std::cout << "num waveguides = " << num_waveguides << std::endl;
-    std::cout << std::endl;
-    
+    std::cout << "#waveguides = " << num_waveguides << ", "
+              << "#layers = " << num_layers
+              << std::endl << std::endl;
+ 
     cf.print_connectivity_matrix();
     std::cout << std::endl;
     return 0;

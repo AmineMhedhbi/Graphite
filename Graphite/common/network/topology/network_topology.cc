@@ -5,12 +5,11 @@
 #include <iostream>
 
 void NetworkTopology::init(std::string const& configFile,
-                              int num_layers,
-                              int num_clusters)
+                           int num_clusters)
 {
-    ConfigFile confFile(configFile);
+    ConfigFile confFile(configFile, num_clusters);
 
-    _num_layers = num_layers;
+    _num_layers = confFile.Value("general", "num_layers");
     _num_clusters = num_clusters;
 
     std::vector< std::vector<int> > connectivity_matrix =
