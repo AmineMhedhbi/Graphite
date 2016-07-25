@@ -55,7 +55,7 @@ NetworkModelOrnoc::NetworkModelOrnoc(Network *net, SInt32 network_id)
    }
 
    // Has Broadcast Capability
-   _has_broadcast_capability = true;
+   _has_broadcast_capability = false;
 
    // Initialize ANet topology
    initializeANetTopologyParams();

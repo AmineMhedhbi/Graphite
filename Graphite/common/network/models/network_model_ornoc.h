@@ -13,8 +13,8 @@ using namespace std;
 #include "optical_link_model.h"
 #include "optical_link_power_model.h"
 
-// Single Sender Multiple Receivers Model
-// 1 sender, N receivers (1 to N)
+// Single Sender Single Receiver Model
+// 1 sender, 1 receiver (1 to 1)
 class NetworkModelOrnoc : public NetworkModel
 {
 public:
