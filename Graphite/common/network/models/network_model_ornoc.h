@@ -23,6 +23,16 @@ public:
 
    void routePacket(const NetPacket &pkt, queue<Hop> &nextHops);
 
+   // Energy computation
+   void computeEnergy(const Time& curr_time);
+   double getOpticalLinkEnergy();
+   double getEnetRouterEnergy();
+   double getEnetLinkEnergy();
+   double getAccessPointEnergy();
+   double getSendHubRouterEnergy();
+   double getRecieveHubRouterEnergy();
+   double getRecieveNetRouterEnergy();
+
    static bool isTileCountPermissible(SInt32 tile_count);
    static pair<bool, vector<tile_id_t> > computeMemoryControllerPositions(SInt32 num_memory_controllers, SInt32 tile_count);
    static pair<bool, vector<vector<tile_id_t> > > computeProcessToTileMapping();
@@ -30,6 +40,8 @@ public:
    void outputSummary(std::ostream &out, const Time& target_completion_time);
 
 private:
+   void setDVFS(double frequency, double voltage, const Time& curr_time);
+
    enum NodeType
    {
       EMESH = 2,  // Start at 2 always
