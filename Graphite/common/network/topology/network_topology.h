@@ -16,8 +16,7 @@ class NetworkTopology
         int _num_layers;
         int _num_clusters;
         int _num_clusters_per_layer;
-        int _num_waveguides;
-        int *_waveguides_size; // #wavelengths per waveguide in the model.
+        int _num_wavelengths;
 };
 
 #endif // NETWORK_TOPOLOGY_H

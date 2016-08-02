@@ -45,6 +45,10 @@ ConfigFile::ConfigFile(std::string const& configFile,
                 break;
         case 16: connectivity_section = "network_topology_sixteen_clusters" ;
                  break;
+        case 32: connectivity_section = "network_topology/thirtytwo_clusters" ;
+                 break;
+        case 64: connectivity_section = "network_topology/sixtyfour_clusters" ;
+                 break;
         default: connectivity_section = "network_topology_eight_clusters" ;
                  break;
     }

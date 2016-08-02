@@ -11,7 +11,23 @@ void NetworkTopology::init(std::string const& configFile,
 
     _num_layers = confFile.Value("general", "num_layers");
     _num_clusters = num_clusters;
-
+    switch(_num_clusters)
+    {
+        case 2:  _num_wavelengths = confFile.Value("num_wavelengths", "two_clusters_wavelengths");
+                 break;
+        case 4:  _num_wavelengths = confFile.Value("num_wavelengths", "four_clusters_wavelengths");
+                 break;
+        case 8:  _num_wavelengths = confFile.Value("num_wavelengths", "eight_clusters_wavelengths");
+                 break;
+        case 16: _num_wavelengths = confFile.Value("num_wavelengths", "sixteen_clusters_wavelengths");
+                 break;
+        case 32: _num_wavelengths = confFile.Value("num_wavelengths", "thirtytwo_clusters_wavelengths");
+                 break;
+        case 64: _num_wavelengths = confFile.Value("num_wavelengths", "sixtyfour_clusters_wavelengths;");
+                 break;
+        default: _num_wavelengths = confFile.Value("num_wavelengths", "eight_clusters_wavelengths;");
+                 break;
+    }
     std::vector< std::vector<int> > connectivity_matrix =
             confFile.get_connectivity_matrix();
  
@@ -24,30 +40,11 @@ void NetworkTopology::init(std::string const& configFile,
                          connectivity_matrix,
                          _num_clusters,
                          _num_clusters_per_layer);
-
-    _num_waveguides = confFile.Value("general", "num_waveguides");
-
-    std::cout << _num_waveguides << std::endl;
-    
-    _waveguides_size = new int [_num_waveguides];
-
-    for (int i = 0; i < _num_waveguides; ++i)
-        _waveguides_size[i] = 0;
-
-    for (int i = 0; i < _num_clusters; ++i)
-    {
-        for (int j = 0; j < _num_clusters; ++j)
-        {
-            if (_receiving_clusters[i][j] != NULL)
-            {
-                _waveguides_size[_receiving_clusters[i][j] -> _waveguide]++;
-            }
-        }
-    }
 }
 
 void NetworkTopology::print_conncetivity_receivers_info()
 {
+    std::cout << std::endl << "number of wavelengths: " << _num_wavelengths << std::endl;
     for (int i = 0; i < _num_clusters; ++i)
     {
         std::cout << std::endl <<  "======================================" << std::endl;

@@ -6,7 +6,7 @@
 int main()
 {
     // power of 2, number of clusters chosen to read proper config
-    int num_clusters = 8;
+    int num_clusters = 2;
     ConfigFile cf(CONFIG_FILE_PATH, num_clusters);
 
     int num_waveguides, num_layers;
@@ -16,7 +16,7 @@ int main()
     std::cout << "#waveguides = " << num_waveguides << ", "
               << "#layers = " << num_layers
               << std::endl << std::endl;
- 
+     
     cf.print_connectivity_matrix();
     std::cout << std::endl;
     return 0;
