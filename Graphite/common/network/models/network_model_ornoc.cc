@@ -225,7 +225,21 @@ NetworkModelOrnoc::createANetRouterAndLinkModels()
 
       // Optical Network Link Models
       double waveguide_length = computeOpticalLinkLength();   // In mm
-      _optical_link = new OpticalLinkModel(this, _num_clusters, _frequency, _voltage, waveguide_length, _flit_width);
+      int num_wavelengths = 80; // default for 16 clusters
+      if(_num_clusters == 2)
+          num_wavelengths = 2;
+      else if(_num_clusters == 4)
+          num_wavelengths = 5;
+      else if(_num_clusters == 8)
+          num_wavelengths = 20;
+      else if(_num_clusters == 16)
+          num_wavelengths = 80;
+      else if(_num_clusters == 32)
+          num_wavelengths = 350;
+      else if(_num_clusters == 64)
+          num_wavelengths = 1418;
+      
+      _optical_link = new OpticalLinkModel(this, num_wavelengths, _frequency, _voltage, waveguide_length, _flit_width);
       LOG_ASSERT_ERROR(_optical_link->getDelay() == 3, "Optical link delay should be 3. Now %llu", _optical_link->getDelay());
 
       // Receive Hub Router Models
